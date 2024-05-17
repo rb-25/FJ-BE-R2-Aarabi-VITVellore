@@ -11,7 +11,7 @@ router.register("users", UserViewSet)
 
 urlpatterns = [
     re_path("users/", include("fj_finance_tracker.users.api.urls")),
-    #re_path("core/", include("fj_finance_tracker.core.api.urls")),
+    re_path("core/", include("fj_finance_tracker.core.urls")),
 ]
 
 app_name = "api"
