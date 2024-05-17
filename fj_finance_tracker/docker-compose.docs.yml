@@ -1,0 +1,16 @@
+services:
+  docs:
+    image: fj_finance_tracker_local_docs
+    container_name: fj_finance_tracker_local_docs
+    build:
+      context: .
+      dockerfile: ./compose/local/docs/Dockerfile
+    env_file:
+      - ./.envs/.local/.django
+    volumes:
+      - ./docs:/docs:z
+      - ./config:/app/config:z
+      - ./fj_finance_tracker:/app/fj_finance_tracker:z
+    ports:
+      - '9000:9000'
+    command: /start-docs
