@@ -13,7 +13,7 @@ from fj_finance_tracker.core.models import Transaction, Budget, Category
 #total spent vs budget for category
 #total money per category for income and expense
 
-class IncomeExpenseView(APIView):
+class TotalTransactionView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
     
@@ -25,9 +25,9 @@ class IncomeExpenseView(APIView):
             transactions = Transaction.objects.filter(user=user, date__month=month)
         else:
             transactions = Transaction.objects.filter(user=user)
-        income = transactions.filter(transaction_type='income').aggregate(total=Sum('amount'))['total']
-        expense = transactions.filter(transaction_type='expense').aggregate(total=Sum('amount'))['total'] 
-        return Response({'income': income, 'expense': expense}, status=status.HTTP_200_OK)
+        income = transactions.filter(transaction_type='Income').aggregate(total=Sum('amount'))['total']
+        expense = transactions.filter(transaction_type='Expense').aggregate(total=Sum('amount'))['total']
+        return Response({'Income': income, 'Expense': expense}, status=status.HTTP_200_OK)
 
 class CategoryBudgetView(APIView):
     permission_classes = [IsAuthenticated]
@@ -44,7 +44,7 @@ class CategoryBudgetView(APIView):
                 data.append({'category': category.name, 'budget': budget.max_amount, 'spent': budget.current_amount, 'remaining': budget.remaining_amount})
         return Response(data, status=status.HTTP_200_OK)
 
-class CategoryIncomeExpenseView(APIView):
+class CategoryTransactionView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
     
@@ -55,7 +55,7 @@ class CategoryIncomeExpenseView(APIView):
         data = []
         for category in categories:
             transactions = Transaction.objects.filter(user=user, category=category)
-            income = transactions.filter(transaction_type='income').aggregate(total=Sum('amount'))['total']
-            expense = transactions.filter(transaction_type='expense').aggregate(total=Sum('amount'))['total']
+            income = transactions.filter(transaction_type='Income').aggregate(total=Sum('amount'))['total']
+            expense = transactions.filter(transaction_type='Expense').aggregate(total=Sum('amount'))['total']
             data.append({'category': category.name, 'income': income, 'expense': expense})
         return Response(data, status=status.HTTP_200_OK)
