@@ -320,7 +320,7 @@ SOCIALACCOUNT_ADAPTER = "fj_finance_tracker.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_FORMS = {"signup": "fj_finance_tracker.users.forms.UserSocialSignupForm"}
 
-SOCIALACCOUNT_PROVIDERS = {
+"""SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
             'client_id': env('GOOGLE_CLIENT_ID'),
@@ -336,7 +336,7 @@ SOCIALACCOUNT_PROVIDERS = {
         },
         'OAUTH_PKCE_ENABLED': True,
     }
-}
+}"""
 #SOCIALACCOUNT_GOOGLE_CLIENT_ID = env('GOOGLE_CLIENT_ID')
 #SOCIALACCOUNT_GOOGLE_CLIENT_SECRET = env('GOOGLE_CLIENT_SECRET')
 
