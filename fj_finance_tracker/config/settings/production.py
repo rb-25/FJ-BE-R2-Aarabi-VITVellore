@@ -184,7 +184,7 @@ LOGGING = {
 # -------------------------------------------------------------------------------
 # Tools that generate code samples can use SERVERS to point to the correct domain
 SPECTACULAR_SETTINGS["SERVERS"] = [
-    {"url": "https://aarabifinance.com", "description": "Production server"},
+    {"url": "https://13.126.28.215", "description": "Production server"},
 ]
 # Your stuff...
 # ------------------------------------------------------------------------------

@@ -31,7 +31,7 @@ certificatesResolvers:
 http:
   routers:
     web-secure-router:
-      rule: 'Host(`aarabifinance.com`) || Host(`www.aarabifinance.com`)'
+      rule: 'Host(`13.126.28.215`) || Host(`aarabifinance.com`)'
       entryPoints:
         - web-secure
       middlewares:
@@ -42,7 +42,7 @@ http:
         certResolver: letsencrypt
 
     flower-secure-router:
-      rule: 'Host(`aarabifinance.com`)'
+      rule: 'Host(`13.126.28.215`)'
       entryPoints:
         - flower
       service: flower
