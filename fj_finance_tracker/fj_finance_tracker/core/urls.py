@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from fj_finance_tracker.core.views.tracking import TransactionViewSet, CreateViewCategoryView, BudgetViewSet
 from fj_finance_tracker.core.views.dashboard import TotalTransactionView, CategoryBudgetView, CategoryTransactionView
 from fj_finance_tracker.core.views.report import ReportView
-from fj_finance_tracker.core.views.notifications import BudgetOverrunNotificationView
+from fj_finance_tracker.core.views.split import CreateSplitExpenseView, SettleSplitExpenseView, SplitExpenseViewSet
 
 urlpatterns = [
     path("categories/", CreateViewCategoryView.as_view(), name="create-view-category"),
@@ -12,7 +12,8 @@ urlpatterns = [
     path("dashboard/category-budget/", CategoryBudgetView.as_view(), name="category-budget"),
     path("dashboard/category-transaction/", CategoryTransactionView.as_view(), name="category-income-expense"),
     path("report/", ReportView.as_view(), name="report"),
-    path("notifications/budget-overrun/", BudgetOverrunNotificationView.as_view(), name="budget-overrun-notification"),
+    path("split-expense/", CreateSplitExpenseView.as_view(), name="split-expense"),
+    path("settle-split-expense/", SettleSplitExpenseView.as_view(), name="settle-split-expense"),
 ]
 
 #Transaction urls
@@ -24,3 +25,8 @@ urlpatterns += transaction_router.urls
 budget_router = DefaultRouter()
 budget_router.register(r"budgets", BudgetViewSet, basename="budgets")
 urlpatterns += budget_router.urls
+
+#Split expense urls
+split_expense_router = DefaultRouter()
+split_expense_router.register(r"split-expenses", SplitExpenseViewSet, basename="split-expenses")
+urlpatterns += split_expense_router.urls

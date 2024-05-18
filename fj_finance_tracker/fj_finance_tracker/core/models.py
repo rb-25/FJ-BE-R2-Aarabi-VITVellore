@@ -3,7 +3,15 @@ from django.db import models
 from fj_finance_tracker.users.models import User
 
 # Create your models here.
-
+class SplitExpense(models.Model):
+    
+    """To split expenses among users"""
+    
+    amount = models.FloatField()
+    users = models.ManyToManyField(User,related_name='participating_in')
+    paid_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='paid_by')
+    settled = models.BooleanField(default=False)
+    
 class Transaction(models.Model):
     
     """To store transactions made by user"""
@@ -35,7 +43,7 @@ class Category(models.Model):
         user = models.ForeignKey(User, on_delete=models.CASCADE)
         type = models.CharField(max_length=50, choices=TRANSACTION_CHOICES)
         name = models.CharField(max_length=255)
-    
+
 class Budget(models.Model):
     
     """To store budget for each category of expense for a user"""
@@ -55,3 +63,4 @@ class Budget(models.Model):
     @property
     def remaining_amount(self):
         return self.max_amount - self.current_amount
+
