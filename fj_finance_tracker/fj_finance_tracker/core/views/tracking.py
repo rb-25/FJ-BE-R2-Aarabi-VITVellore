@@ -1,4 +1,5 @@
 from django.utils import timezone
+from django.core.mail import send_mail
 from rest_framework.views import APIView, Response, status
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -37,6 +38,21 @@ class TransactionViewSet(ModelViewSet):
     
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+        
+        #To check if the transaction if the user has exceeded the budget
+        budgets = Budget.objects.filter(user=self.request.user, category=serializer.validated_data['category'])
+        for budget in budgets:
+            if budget.remaining_amount <= 0:
+                subject = 'Budget Overrun Alert'
+                message = f'Hello {budget.user.name},\n\nYou have exceeded your budget for {budget.category.name}. Please review your expenses.'
+                
+                send_mail(
+                    subject,
+                    message,
+                    "noreply@aarabifinance.com",
+                    recipient_list=[self.request.user.email],
+                    fail_silently=True
+                )
     
     def get_queryset(self):
         return Transaction.objects.filter(user=self.request.user)

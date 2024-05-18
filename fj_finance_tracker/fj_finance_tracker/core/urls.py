@@ -4,6 +4,7 @@ from rest_framework.routers import DefaultRouter
 from fj_finance_tracker.core.views.tracking import TransactionViewSet, CreateViewCategoryView, BudgetViewSet
 from fj_finance_tracker.core.views.dashboard import TotalTransactionView, CategoryBudgetView, CategoryTransactionView
 from fj_finance_tracker.core.views.report import ReportView
+from fj_finance_tracker.core.views.notifications import BudgetOverrunNotificationView
 
 urlpatterns = [
     path("categories/", CreateViewCategoryView.as_view(), name="create-view-category"),
@@ -11,6 +12,7 @@ urlpatterns = [
     path("dashboard/category-budget/", CategoryBudgetView.as_view(), name="category-budget"),
     path("dashboard/category-transaction/", CategoryTransactionView.as_view(), name="category-income-expense"),
     path("report/", ReportView.as_view(), name="report"),
+    path("notifications/budget-overrun/", BudgetOverrunNotificationView.as_view(), name="budget-overrun-notification"),
 ]
 
 #Transaction urls

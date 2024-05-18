@@ -77,6 +77,7 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.mfa",
     "allauth.socialaccount",
+    'allauth.socialaccount.providers.google',
     "django_celery_beat",
     "rest_framework",
     "rest_framework.authtoken",
@@ -318,6 +319,26 @@ ACCOUNT_FORMS = {"signup": "fj_finance_tracker.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "fj_finance_tracker.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_FORMS = {"signup": "fj_finance_tracker.users.forms.UserSocialSignupForm"}
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': env('GOOGLE_CLIENT_ID'),
+            'secret': env('GOOGLE_CLIENT_SECRET'),
+            'key': ''
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+    }
+}
+#SOCIALACCOUNT_GOOGLE_CLIENT_ID = env('GOOGLE_CLIENT_ID')
+#SOCIALACCOUNT_GOOGLE_CLIENT_SECRET = env('GOOGLE_CLIENT_SECRET')
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
