@@ -49,7 +49,7 @@ class TransactionViewSet(ModelViewSet):
                 send_mail(
                     subject,
                     message,
-                    "noreply@aarabifinance.com",
+                    "noreply@financetracker.aarabi.me",
                     recipient_list=[self.request.user.email],
                     fail_silently=True
                 )

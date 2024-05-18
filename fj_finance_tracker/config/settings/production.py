@@ -10,7 +10,7 @@ from .base import env
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["aarabifinance.com"])
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["financetracker.aarabi.me"])
 
 # DATABASES
 # ------------------------------------------------------------------------------
@@ -107,7 +107,7 @@ MEDIA_URL = f"https://{aws_s3_domain}/media/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
 DEFAULT_FROM_EMAIL = env(
     "DJANGO_DEFAULT_FROM_EMAIL",
-    default="Personal Finance Tracker <noreply@aarabifinance.com>",
+    default="Personal Finance Tracker <noreply@financetracker.aarabi.me>",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#server-email
 SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
@@ -184,7 +184,7 @@ LOGGING = {
 # -------------------------------------------------------------------------------
 # Tools that generate code samples can use SERVERS to point to the correct domain
 SPECTACULAR_SETTINGS["SERVERS"] = [
-    {"url": "https://13.126.28.215", "description": "Production server"},
+    {"url": "https://financetracker.aarabi.me", "description": "Production server"},
 ]
 # Your stuff...
 # ------------------------------------------------------------------------------
