@@ -31,7 +31,7 @@ certificatesResolvers:
 http:
   routers:
     web-secure-router:
-      rule: 'Host(`financetracker.aarabi.me`) || Host(`financetracker.aarabi.me`)'
+      rule: 'Host(`financetracker.aarabi.me`) || Host(`www.financetracker.aarabi.me`)'
       entryPoints:
         - web-secure
       middlewares:
