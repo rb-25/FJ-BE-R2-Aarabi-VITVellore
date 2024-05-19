@@ -4,10 +4,11 @@ from fj_finance_tracker.core.models import Transaction, Budget, Category, SplitE
 
 
 class TransactionSerializer(serializers.ModelSerializer):
-    
+    receipt = serializers.ImageField(allow_empty_file=True, required=False)
+
     class Meta:
         model = Transaction
-        fields = ['id', 'amount', 'description', 'category', 'date', 'transaction_type', 'category_name']
+        fields = ['id', 'amount', 'description', 'category', 'date', 'transaction_type', 'category_name','receipt']
         
 
 class CategorySerializer(serializers.ModelSerializer):

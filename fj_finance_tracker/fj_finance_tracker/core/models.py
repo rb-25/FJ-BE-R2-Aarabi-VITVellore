@@ -25,7 +25,8 @@ class Transaction(models.Model):
     amount = models.FloatField()
     date = models.DateField(auto_now_add=True)
     description = models.TextField(null=True, blank=True)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE, null=True, blank=True) 
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, null=True, blank=True)
+    receipt = models.ImageField(upload_to='receipts/',null=True) 
     
     @property
     def category_name(self):
