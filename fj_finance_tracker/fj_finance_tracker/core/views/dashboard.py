@@ -14,6 +14,9 @@ from fj_finance_tracker.core.models import Transaction, Budget, Category
 #total money per category for income and expense
 
 class TotalTransactionView(APIView):
+    
+    """View to display total income vs expense"""
+    
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
     
@@ -21,6 +24,7 @@ class TotalTransactionView(APIView):
     def get(request):
         user = request.user
         month = request.query_params.get('month')
+        #if month is a query parameter
         if month is not None:
             transactions = Transaction.objects.filter(user=user, date__month=month)
         else:
@@ -30,6 +34,9 @@ class TotalTransactionView(APIView):
         return Response({'Income': income, 'Expense': expense}, status=status.HTTP_200_OK)
 
 class CategoryBudgetView(APIView):
+    
+    """View to display money spent vs budget category wise"""
+    
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
     
@@ -45,6 +52,9 @@ class CategoryBudgetView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 class CategoryTransactionView(APIView):
+    
+    """View to display income vs expense for category"""
+    
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
     

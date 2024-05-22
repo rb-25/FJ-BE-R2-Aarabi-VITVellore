@@ -48,10 +48,11 @@ class SettleSplitExpenseView(APIView):
 
 class SplitExpenseViewSet(ReadOnlyModelViewSet):
     
+    """To view split expenses per user"""    
+    
     perimission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
     
-    #To view split expenses
     queryset=SplitExpense.objects.all()
     serializer_class = SplitExpenseSerializer
     

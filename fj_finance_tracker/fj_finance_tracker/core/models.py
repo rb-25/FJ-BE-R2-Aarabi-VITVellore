@@ -65,3 +65,18 @@ class Budget(models.Model):
     def remaining_amount(self):
         return self.max_amount - self.current_amount
 
+class RecurringTransaction (models.Model):
+    
+    """To store recurring transactions"""
+    
+    FREQUENCY_CHOICES=(
+        ('Yearly','Yearly'),
+        ('Monthly','Monthly'),
+        ('Weekly','Weekly'),
+        ('Daily','Daily')
+    )
+    transaction=models.ForeignKey(Transaction,on_delete=models.CASCADE)
+    frequency=models.CharField(max_length=100,choices=FREQUENCY_CHOICES)
+    start_date=models.DateField()
+    end_date=models.DateField(null=True)
+    next_transaction=models.DateField()

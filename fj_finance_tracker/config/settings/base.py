@@ -93,6 +93,22 @@ LOCAL_APPS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': str(env('GOOGLE_CLIENT_ID')),
+            'secret': str(env('GOOGLE_CLIENT_SECRET')),
+            'key': ''
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
@@ -320,25 +336,6 @@ SOCIALACCOUNT_ADAPTER = "fj_finance_tracker.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_FORMS = {"signup": "fj_finance_tracker.users.forms.UserSocialSignupForm"}
 
-"""SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'APP': {
-            'client_id': env('GOOGLE_CLIENT_ID'),
-            'secret': env('GOOGLE_CLIENT_SECRET'),
-            'key': ''
-        },
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        },
-        'OAUTH_PKCE_ENABLED': True,
-    }
-}"""
-#SOCIALACCOUNT_GOOGLE_CLIENT_ID = env('GOOGLE_CLIENT_ID')
-#SOCIALACCOUNT_GOOGLE_CLIENT_SECRET = env('GOOGLE_CLIENT_SECRET')
 
 # django-rest-framework
 # -------------------------------------------------------------------------------

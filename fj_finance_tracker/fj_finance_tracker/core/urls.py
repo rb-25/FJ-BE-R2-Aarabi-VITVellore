@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from fj_finance_tracker.core.views.tracking import TransactionViewSet, CreateViewCategoryView, BudgetViewSet
 from fj_finance_tracker.core.views.dashboard import TotalTransactionView, CategoryBudgetView, CategoryTransactionView
 from fj_finance_tracker.core.views.report import ReportView
-from fj_finance_tracker.core.views.split import CreateSplitExpenseView, SettleSplitExpenseView, SplitExpenseViewSet
+from fj_finance_tracker.core.views.split_expenses import CreateSplitExpenseView, SettleSplitExpenseView, SplitExpenseViewSet
 
 urlpatterns = [
     path("categories/", CreateViewCategoryView.as_view(), name="create-view-category"),

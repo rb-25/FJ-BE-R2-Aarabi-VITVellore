@@ -11,6 +11,9 @@ from fj_finance_tracker.core.models import Transaction, Budget, Category
 from fj_finance_tracker.core.serializers import TransactionSerializer
 
 class ReportView(APIView):
+    
+    """To generate report(csv file) of transactions"""
+    
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
     

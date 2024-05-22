@@ -11,6 +11,9 @@ from fj_finance_tracker.core.models import Transaction, Budget, Category
 from fj_finance_tracker.core.serializers import  TransactionSerializer, BudgetSerializer, CategorySerializer
 
 class CreateViewCategoryView(APIView):
+    
+    """Create a category"""
+    
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
     
@@ -28,8 +31,12 @@ class CreateViewCategoryView(APIView):
         if type:
             categories = categories.filter(type=type)
         return Response(CategorySerializer(categories, many=True).data, status=status.HTTP_200_OK)
+
     
 class TransactionViewSet(ModelViewSet):
+    
+    """To perform all transacation operations"""
+    
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
     
@@ -39,7 +46,7 @@ class TransactionViewSet(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
         
-        #To check if the transaction if the user has exceeded the budget
+        #To check if the transaction if the user has exceeded the budget and to send mail
         budgets = Budget.objects.filter(user=self.request.user, category=serializer.validated_data['category'])
         for budget in budgets:
             if budget.remaining_amount <= 0:
@@ -57,7 +64,11 @@ class TransactionViewSet(ModelViewSet):
     def get_queryset(self):
         return Transaction.objects.filter(user=self.request.user)
 
+
 class BudgetViewSet(ModelViewSet):
+    
+    """To perform all operations on budget"""
+    
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
     

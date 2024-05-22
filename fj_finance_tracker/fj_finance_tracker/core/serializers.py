@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from fj_finance_tracker.core.models import Transaction, Budget, Category, SplitExpense
+from fj_finance_tracker.core.models import Transaction, Budget, Category, SplitExpense, RecurringTransaction
 
 
 class TransactionSerializer(serializers.ModelSerializer):
@@ -31,3 +31,9 @@ class SplitExpenseSerializer(serializers.ModelSerializer):
     class Meta:
         model = SplitExpense
         fields = ['id', 'user_email', 'amount', 'paid_by_email', 'settled']
+
+class RecurringTransactionSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model=RecurringTransaction
+        fields="__all__"
