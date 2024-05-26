@@ -75,6 +75,7 @@ class RecurringTransaction (models.Model):
         ('Weekly','Weekly'),
         ('Daily','Daily')
     )
+    
     transaction=models.ForeignKey(Transaction,on_delete=models.CASCADE)
     frequency=models.CharField(max_length=100,choices=FREQUENCY_CHOICES)
     start_date=models.DateField()
